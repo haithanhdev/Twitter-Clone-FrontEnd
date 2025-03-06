@@ -1,6 +1,13 @@
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import "@vidstack/react/player/styles/base.css";
+import "@vidstack/react/player/styles/plyr/theme.css";
+import { MediaPlayer, MediaProvider } from "@vidstack/react";
+import {
+  PlyrLayout,
+  plyrLayoutIcons,
+} from "@vidstack/react/player/layouts/plyr";
 import { Link } from "react-router-dom";
 
 const getGoogleAuthUrl = () => {
@@ -39,6 +46,17 @@ export default function Home() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </span>
       </div>
+      <h2>HLS STREAMING</h2>
+      <MediaPlayer
+        title="Sprite Fight"
+        src="http://localhost:4000/static/video-hls/fMUQVpd3A6bTC6qfy4YcP/master.m3u8"
+      >
+        <MediaProvider />
+        <PlyrLayout
+          thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
+          icons={plyrLayoutIcons}
+        />
+      </MediaPlayer>
       <h1>Google OAuth 2.0</h1>
       <p className="read-the-docs">
         {isAuthenticated ? (
