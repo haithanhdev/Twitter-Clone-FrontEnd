@@ -10,8 +10,8 @@ export default function Login() {
     const refreshToken = params.get("refresh_token");
     const newUser = params.get("new_user");
     const verify = params.get("verify");
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem("access_token", accessToken);
+    localStorage.setItem("refresh_token", refreshToken);
     navigate("/");
   }, [params, navigate]);
   return <div>Login</div>;

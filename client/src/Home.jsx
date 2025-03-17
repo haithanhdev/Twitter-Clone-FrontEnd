@@ -30,10 +30,10 @@ const getGoogleAuthUrl = () => {
 
 export default function Home() {
   const googleOAuthUrl = getGoogleAuthUrl();
-  const isAuthenticated = Boolean(localStorage.getItem("accessToken"));
+  const isAuthenticated = Boolean(localStorage.getItem("access_token"));
   const logout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
     window.location.reload();
   };
   return (
