@@ -27,10 +27,11 @@ const getGoogleAuthUrl = () => {
   const queryString = new URLSearchParams(query).toString();
   return `${url}?${queryString}`;
 };
+const googleOAuthUrl = getGoogleAuthUrl();
 
 export default function Home() {
-  const googleOAuthUrl = getGoogleAuthUrl();
   const isAuthenticated = Boolean(localStorage.getItem("access_token"));
+  const profile = JSON.parse(localStorage.getItem("profile")) || {};
   const logout = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
@@ -49,11 +50,13 @@ export default function Home() {
       <h2>HLS STREAMING</h2>
       <MediaPlayer
         title="Sprite Fight"
-        src="http://localhost:4000/static/video-hls/fMUQVpd3A6bTC6qfy4YcP/master.m3u8"
+        src="http://localhost:4000/static/video-hls/_DkWQj1kPVGzD1LVhPYx5/master.m3u8"
+        aspectRatio={16 / 9}
+        crossOrigin=""
       >
         <MediaProvider />
         <PlyrLayout
-          thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
+          // thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
           icons={plyrLayoutIcons}
         />
       </MediaPlayer>
@@ -61,7 +64,9 @@ export default function Home() {
       <p className="read-the-docs">
         {isAuthenticated ? (
           <>
-            <span>Hello my friend, you are logged in</span>
+            <span>
+              Hello my <strong>{profile.username}</strong>, you are logged in
+            </span>
             <button onClick={logout}>Logout</button>
           </>
         ) : (
