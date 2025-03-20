@@ -35,14 +35,14 @@ export default function Chat() {
       });
   };
   useEffect(() => {
-    socket.auth = {
-      _id: profile._id,
-    };
-    socket.connect();
+    // socket.connect();
     socket.on("receive_message", (data) => {
       const { payload } = data;
       //Thêm vào array
       setConversations((conversations) => [payload, ...conversations]);
+    });
+    socket.on("connect_error", (err) => {
+      console.log(err.data);
     });
     return () => {
       socket.disconnect();
